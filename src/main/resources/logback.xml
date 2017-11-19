@@ -8,6 +8,14 @@
         <encoder>
             <pattern>%d{HH:mm:ss.SSS} [%thread] %highlight(%-5level) %logger{36} [%file:%line] - %msg%n</pattern>
         </encoder>
+
+        <filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+            <evaluator> <!-- defaults to type ch.qos.logback.classic.boolex.JaninoEventEvaluator -->
+                <expression>return message.contains("you");</expression>
+            </evaluator>
+            <OnMismatch>DENY</OnMismatch>
+            <OnMatch>ACCEPT</OnMatch>
+        </filter>
     </appender>
 
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -33,14 +41,11 @@
             <pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
             <outputPatternAsHeader>true</outputPatternAsHeader>
         </encoder>
-        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>ERROR</level>
-        </filter>
     </appender>
 
 
     <logger name="org.przybyl.logs" level="${LOG_LEVEL:-debug}" />
-    <logger name="org.przybyl.logs.WORKER" level="info" additivity="false">
+    <logger name="org.przybyl.logs.WORKER" level="trace">
         <appender-ref ref="TMPFILE"/>
     </logger>
 
