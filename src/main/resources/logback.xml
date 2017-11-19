@@ -1,2 +1,15 @@
 <configuration debug="true">
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %highlight(%-5level) %logger{36} [%file:%line] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="org.przybyl.logs" level="debug" />
+
+    <root level="info">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
 </configuration>
