@@ -36,7 +36,7 @@
 
 
     <logger name="org.przybyl.logs" level="${LOG_LEVEL:-debug}" />
-    <logger name="org.przybyl.logs.WORKER" level="trace">
+    <logger name="org.przybyl.logs.WORKER" level="info" additivity="false">
         <appender-ref ref="TMPFILE"/>
     </logger>
 
