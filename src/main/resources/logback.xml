@@ -25,7 +25,20 @@
         </encoder>
     </appender>
 
+    <appender name="TMPFILE" class="ch.qos.logback.core.FileAppender">
+        <file>/tmp/test.log</file>
+        <append>false</append>
+        <immediateFlush>true</immediateFlush>
+        <encoder>
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
     <logger name="org.przybyl.logs" level="${LOG_LEVEL:-debug}" />
+    <logger name="org.przybyl.logs.WORKER" level="trace">
+        <appender-ref ref="TMPFILE"/>
+    </logger>
 
     <root level="${LOG_LEVEL:-info}">
         <if condition='isDefined("LOG_STDOUT")'>

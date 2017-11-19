@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class LogProducer {
 
-    private static final Logger logger = LoggerFactory.getLogger(LogProducer.class);
+    private static final Logger logger = LoggerFactory.getLogger("org.przybyl.logs.PRODUCER");
 
     public static void main(String[] args) {
 
@@ -41,7 +41,7 @@ public class LogProducer {
 }
 
 class ActualWorker {
-    private static final Logger logger = LoggerFactory.getLogger(LogProducer.class);
+    private static final Logger logger = LoggerFactory.getLogger("org.przybyl.logs.WORKER");
     private static SecureRandom random = new SecureRandom();
 
     void doHeavyStuff() {
