@@ -10,7 +10,8 @@ repositories {
 dependencies {
 
     compile "org.slf4j:slf4j-api:1.7.25"
-    runtime group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+    runtimeOnly group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+    runtimeOnly "org.codehaus.janino:janino:3.0.7"
 
     testCompile 'junit:junit:4.12'
 }
