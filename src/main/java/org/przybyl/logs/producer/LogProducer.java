@@ -1,5 +1,7 @@
 package org.przybyl.logs.producer;
 
+import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.core.util.StatusPrinter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,6 +18,11 @@ public class LogProducer {
     private static final Logger logger = LoggerFactory.getLogger(LogProducer.class);
 
     public static void main(String[] args) {
+        // assume SLF4J is bound to logback in the current environment
+        LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
+        // print logback's internal status
+        StatusPrinter.print(lc);
+
         logger.info("Starting the app.");
 
         new ActualWorker().doHeavyStuff();
