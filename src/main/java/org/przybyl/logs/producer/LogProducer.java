@@ -1,5 +1,8 @@
 package org.przybyl.logs.producer;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.security.SecureRandom;
 
 
@@ -8,14 +11,17 @@ import java.security.SecureRandom;
  */
 public class LogProducer {
 
+    private static final Logger logger = LoggerFactory.getLogger(LogProducer.class);
+
     public static void main(String[] args) {
-        System.out.println("INFO: Starting the app.");
+        logger.info("Starting the app.");
 
         new ActualWorker().doHeavyStuff();
     }
 }
 
 class ActualWorker {
+    private static final Logger logger = LoggerFactory.getLogger(LogProducer.class);
     private static SecureRandom random = new SecureRandom();
 
     void doHeavyStuff() {
@@ -24,11 +30,10 @@ class ActualWorker {
                 doAndLogSomeStuff();
                 Thread.sleep(500);
             } catch (InterruptedException e) {
-                System.out.println("INFO: Interrupted during sleep, going to quit.");
+                logger.info("Interrupted during sleep, going to quit.");
                 break;
             } catch (Throwable t) {
-                System.out.println("ERROR: Should not happen, but my stupid leader insists on this log. Anyway.");
-                t.printStackTrace();
+                logger.error("Should not happen, but my stupid leader insists on this log. Anyway.", t);
                 System.exit(42);
             }
         }
@@ -38,19 +43,19 @@ class ActualWorker {
         int nextActionIndex = random.nextInt(50) / 10;
         switch (nextActionIndex) {
             case 0:
-                System.out.println("ERROR: Things went out of control.");
+                logger.error("Things went out of control.");
                 break;
             case 1:
-                System.out.println("WARN: Didn't I warn you?");
+                logger.warn("Didn't I warn you?");
                 break;
             case 2:
-                System.out.println("INFO: For your information: do it as ASAP as possible!");
+                logger.info("For your information: do it as ASAP as possible!");
                 break;
             case 3:
-                System.out.println("DEBUG: Let's see what's going on...");
+                logger.debug("Let's see what's going on...");
                 break;
             case 4:
-                System.out.println("TRACE: This is micro management.");
+                logger.trace("This is micro management.");
                 break;
             default:
                 throw new IllegalArgumentException("Action code outside range!");
