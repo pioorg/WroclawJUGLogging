@@ -1,4 +1,6 @@
 <configuration>
+    <contextName>logging-example-simple</contextName>
+    <jmxConfigurator />
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>

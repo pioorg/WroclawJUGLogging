@@ -60,7 +60,7 @@ class ActualWorker {
     }
 
     private void doAndLogSomeStuff() {
-        int nextActionIndex = random.nextInt(51) / 10;
+        int nextActionIndex = random.nextInt(50) / 10;
         switch (nextActionIndex) {
             case 0:
                 logger.error("Things went out of control.");
