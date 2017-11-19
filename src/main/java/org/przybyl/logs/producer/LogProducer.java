@@ -19,7 +19,24 @@ public class LogProducer {
 
         logger.info("Starting the app.");
 
+        addShutdownHook();
+
         new ActualWorker().doHeavyStuff();
+    }
+
+    private static void addShutdownHook() {
+        final Thread mainProducerThread = Thread.currentThread();
+        Thread shutdownHookThread = new Thread(() -> {
+            logger.info("Stopping the app.");
+            try {
+                mainProducerThread.interrupt();
+                mainProducerThread.join(1000);
+            } catch (InterruptedException e) {
+                logger.error("Interrupted during join.", e);
+            }
+        });
+        shutdownHookThread.setName("Woźny");
+        Runtime.getRuntime().addShutdownHook(shutdownHookThread);
     }
 }
 
