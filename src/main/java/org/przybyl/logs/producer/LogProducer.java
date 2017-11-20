@@ -4,6 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.security.SecureRandom;
+import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -46,7 +48,7 @@ class ActualWorker {
                 logger.error("Things went out of control.");
                 break;
             case 1:
-                logger.warn("Didn't I warn you?");
+                logger.warn("Didn't I warn you? {} {} {}", ene(), due(), like());
                 break;
             case 2:
                 logger.info("For your information: do it as ASAP as possible!");
@@ -60,5 +62,22 @@ class ActualWorker {
             default:
                 throw new IllegalArgumentException("Action code outside range!");
         }
+    }
+
+    private StringBuilder ene() {
+        return new StringBuilder("ene");
+    }
+
+    private Object due() {
+        return new Object() {
+            @Override
+            public String toString() {
+                return "due";
+            }
+        };
+    }
+
+    private List<Object> like() {
+        return Arrays.asList("like", "fake");
     }
 }
